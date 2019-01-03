@@ -5,14 +5,15 @@
 #'
 #'
 #' @param fitfilename name (including file path) of .fit file
+#' @param checkconda logical, check conda environment for packages
 #'
 #' @return a list of three dataframes:  \eqn{session},
 #'     \eqn{records}and \eqn{events}
 #'
 #' @export
-get_fit_dfs <- function(fitfilename) {
+get_fit_dfs <- function(fitfilename,checkconda=TRUE) {
 
-  if (!getOption("fitparseR.conda.checked")) {
+  if (checkconda & !getOption("fitparseR.conda.checked")) {
     set_fitparse_conda()
     options(list(fitparseR.conda.checked = TRUE))
   }
@@ -47,12 +48,20 @@ listofcols_to_df <- function(listofcolumns)  {
     vvv[[length(vvv) + 1]] <- unlist(vlist)
   }
   names(vvv) <- cnames
-  return(as.data.frame(vvv, stringsAsFactors = FALSE))
+  dfret <- as.data.frame(vvv, stringsAsFactors = FALSE)
+  #  the key timestamp variable should be POSIXct
+  if ("timestamp" %in% cnames) {
+    dfret$timestamp.s <- as.POSIXct(dfret$timestamp,
+                                    format = "%Y-%m-%dT%H:%M:%OSZ",
+                                    tz = "UTC")
+  }
+  return(dfret)
 }
 
 set_fitparse_conda <- function()  {
-  message("setting up conda ")
+  message("checking conda ")
   reticulate::use_condaenv("r-reticulate", required = TRUE)
   reticulate::py_install(c("pandas", "python-fitparse"))
+  message("done checking conda")
   invisible()
 }

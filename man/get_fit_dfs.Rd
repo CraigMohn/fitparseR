@@ -4,10 +4,12 @@
 \alias{get_fit_dfs}
 \title{read gps fit data files}
 \usage{
-get_fit_dfs(fitfilename)
+get_fit_dfs(fitfilename, checkconda = TRUE)
 }
 \arguments{
 \item{fitfilename}{name (including file path) of .fit file}
+
+\item{checkconda}{logical, check conda environment for packages}
 }
 \value{
 a list of three dataframes:  \eqn{session},
