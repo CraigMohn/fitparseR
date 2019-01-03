@@ -49,6 +49,7 @@ listofcols_to_df <- function(listofcolumns)  {
   names(vvv) <- cnames
   return(as.data.frame(vvv, stringsAsFactors = FALSE))
 }
+
 set_fitparse_conda <- function()  {
   message("setting up conda ")
   reticulate::use_condaenv("r-reticulate", required = TRUE)

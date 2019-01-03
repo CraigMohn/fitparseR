@@ -22,23 +22,22 @@ def message_df(fitfile=None,msgtype='record',
             if msg_data.units and appendunits:
                 keyname = msg_data.name + "." + msg_data.units
             else:
-                keyname = msg_data.name 
+                keyname = msg_data.name
 
             if msg_data.value is not None :
                 #if type(msg_data.value) is str :
                 #    strvars.add(keyname)
-                msgdict[keyname] = msg_data.value 
- 
+                msgdict[keyname] = msg_data.value
+
         msgdf = msgdf.append(msgdict,ignore_index=True)
 
     msgdf.dropna(axis=0,how='all',inplace=True)
     cnames = msgdf.columns.tolist()
-    cnames = [i for i in cnames if not ('enhanced_' in i or 
-                                        'unknown_' in i or
+    cnames = [i for i in cnames if not ('unknown_' in i or
                                         '_position' in i or
                                         'phase' in i)]
     msgdf = msgdf[cnames]
-    
+
     msgdf = msgdf.where((pandas.notnull(msgdf)), None)
     if dropmissing :
         msgdf = msgdf.dropna(axis=1,how='all')
@@ -51,12 +50,12 @@ def message_df(fitfile=None,msgtype='record',
         print(msgdf.dtypes)
 
     if outfile is None :
-        return msgdf 
+        return msgdf
     else:
          msgdf.to_json(path_or_buf=outfile,date_format='iso',
                        date_unit='s')
-         return     
-  
+         return
+
 def readff(ffname=None) :
     if ffname is None:
         print ("No fit file name given")
@@ -69,4 +68,4 @@ def readff(ffname=None) :
         sys.exit(1)
 
     return fitfile
-        
+

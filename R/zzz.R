@@ -3,11 +3,11 @@
 
   #  set flag that we are loaded, not called yet
   op <- options()
-  op.fitparseR <- list(
+  op.fitparser <- list(
     fitparseR.conda.checked = FALSE
   )
-  toset <- !(names(op.fitparseR) %in% names(op))
-  if (any(toset)) options(op.fitparseR[toset])
+  toset <- !(names(op.fitparser) %in% names(op))
+  if (any(toset)) options(op.fitparser[toset])
 
   invisible()
 }
