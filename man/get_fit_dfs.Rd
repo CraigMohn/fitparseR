@@ -4,12 +4,15 @@
 \alias{get_fit_dfs}
 \title{read gps fit data files}
 \usage{
-get_fit_dfs(fitfilename, checkconda = TRUE)
+get_fit_dfs(fitfilename, checkconda = TRUE, requiredVars)
 }
 \arguments{
 \item{fitfilename}{name (including file path) of .fit file}
 
 \item{checkconda}{logical, check conda environment for packages}
+
+\item{requiredVars}{vector of variable names which will be generated as NA
+if they are not already in the fit data records}
 }
 \value{
 a list of three dataframes:  \eqn{session},

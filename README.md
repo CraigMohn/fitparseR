@@ -23,9 +23,9 @@ to know Python to figure out how to make it suit your needs.
 You have to have a conda (either anaconda or miniconda) setup that R can find.
 There are lots of resources to help you do that.  Use your search engine.  In
 theory it should require python 2.X, but I had no problems with python 3.X.  
-The first python call triggers a check that requisite packages are installed.
-This is slow so there is a flag to bypass this behavior if you know your conda
-environment is current.
+The first call to read a fit file triggers a time-consuming check that the
+conda environment has the required packages installed, unless a flag to skip it
+is TRUE.
 
 This package is not fast.  It's not terribly elegant.  But it is more likely to
 stay current than other options, since python fitparse updates should be

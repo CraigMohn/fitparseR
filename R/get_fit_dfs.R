@@ -6,12 +6,15 @@
 #'
 #' @param fitfilename name (including file path) of .fit file
 #' @param checkconda logical, check conda environment for packages
+#' @param requiredVars vector of variable names which will be generated as NA
+#'   if they are not already in the fit data records
 #'
 #' @return a list of three dataframes:  \eqn{session},
 #'     \eqn{records}and \eqn{events}
 #'
 #' @export
-get_fit_dfs <- function(fitfilename,checkconda=TRUE) {
+get_fit_dfs <- function(fitfilename,checkconda=TRUE,
+                        requiredVars) {
 
   if (checkconda & !getOption("fitparseR.conda.checked")) {
     set_fitparse_conda()
@@ -30,8 +33,9 @@ get_fit_dfs <- function(fitfilename,checkconda=TRUE) {
              appendunits = FALSE, fromR = TRUE)
   session <- listofcols_to_df(jsonlite::fromJSON(tfile))
 
-  message_df(fitfile, outfile = tfile, fromR = TRUE)
+  message_df(fitfile, outfile = tfile, fromR = TRUE, dropmissing=FALSE)
   records <- listofcols_to_df(jsonlite::fromJSON(tfile))
+  if (!missing(requiredVars)) records <- addVars(records,requiredVars)
 
   message_df(fitfile, outfile = tfile, msgtype = "event",
              appendunits = FALSE, fromR = TRUE)
@@ -56,6 +60,12 @@ listofcols_to_df <- function(listofcolumns)  {
                                     tz = "UTC")
   }
   return(dfret)
+}
+addVars <- function(df,varlist)  {
+  for (v in varlist) {
+    if (! v %in% names(df)) df[[v]] <- NA
+  }
+  return(df)
 }
 
 set_fitparse_conda <- function()  {
