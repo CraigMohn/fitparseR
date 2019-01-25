@@ -19,6 +19,5 @@ install:
   - conda info -a
   - conda create -q -n test-env python=$TRAVIS_PYTHON_VERSION
   - source activate test-env
-  - pip install sys
   - pip install pandas
   - pip install python-fitparse
