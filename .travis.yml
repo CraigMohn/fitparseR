@@ -19,3 +19,6 @@ env:
 r_packages:
    - reticulate
    - jsonlite
+
+before_install:
+  - pip install fitparse
