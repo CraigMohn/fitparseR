@@ -10,7 +10,6 @@ addons:
     packages:
       - python2.7
       - python-numpy
-      - python-fitparse
 
 env:
  global:
