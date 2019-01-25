@@ -1,23 +1,21 @@
-# Sample .travis.yml for R projects from https://github.com/craigcitro/r-travis
-
+#
 language: r
 sudo: required
 warnings_are_errors: true
+dist: trusty
+cache: packages
+
+addons:
+  apt:
+    packages:
+      - python2.7
+      - python-numpy
+      - python-fitparse
 
 env:
-  global:
-    - NOT_CRAN=true
-before_install: echo "options(repos = c(CRAN='http://cran.rstudio.com'))" > ~/.Rprofile
+ global:
+   - CRAN: http://cran.rstudio.com
 
-install:
-  - wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
-  - bash miniconda.sh -b -p $HOME/miniconda
-  - export PATH="$HOME/miniconda/bin:$PATH"
-  - hash -r
-  - conda config --set always_yes yes --set changeps1 no
-  - conda update -q conda
-  - conda info -a
-  - conda create -q -n test-env python=$TRAVIS_PYTHON_VERSION
-  - source activate test-env
-  - pip install pandas
-  - pip install python-fitparse
+r_packages:
+   - reticulate
+   - jsonlite

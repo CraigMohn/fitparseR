@@ -1,4 +1,4 @@
-#' fitparesR: A package for reading garmin .fit files
+#' fitparseR: A package for reading garmin .fit files
 #'
 #' The fitparseR package uses reticulate and jsonlite to wrap
 #'   the python fitparse package, which seems to be kept more

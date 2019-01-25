@@ -2,7 +2,7 @@
 % Please edit documentation in R/fitparseR.R
 \name{fitparseR}
 \alias{fitparseR}
-\title{fitparesR: A package for reading garmin .fit files}
+\title{fitparseR: A package for reading garmin .fit files}
 \description{
 The fitparseR package uses reticulate and jsonlite to wrap
   the python fitparse package, which seems to be kept more
