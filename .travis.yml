@@ -9,10 +9,8 @@ addons:
   apt:
     packages:
       - python2.7
+      - python-numpy
 
-before_install:
-  - pip install numpy 
-  
 env:
  global:
    - CRAN: http://cran.rstudio.com
