@@ -3,7 +3,7 @@ An R wrapper for python-fitparse to read Garmin .fit data files
 
 The python package fitparse seems to be the best-maintained and reasonably
 current tool for reading the .fit files produced by Garmin devices.  Many 
-thanks to the developers/maintainers of that package.
+thanks to the developers/maintainers of that package. 
 
 This package was developed to read .fit files from the Edge 820 that replaces 
 my old Edge 800 unit. Several alternative R packages were incapable of dealing
@@ -18,7 +18,7 @@ returned.  Variables whose names contain "unknown_", "_position", or "phase"
 are not returned.  If your device reports a single-valued field that you want
 which fits that pattern, or it reports a multi-valued parameter that does not
 and that throws an error, the code is in readfitffile.py, and you don't need 
-to know Python to figure out how to make it suit your needs.
+to know much Python to figure out how to make it suit your needs.
 
 You have to have a conda (either anaconda or miniconda) setup that R can find.
 There are lots of resources to help you do that.  Use your search engine.  In
