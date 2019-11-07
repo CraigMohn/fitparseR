@@ -33,9 +33,10 @@ def message_df(fitfile=None,msgtype='record',
 
     msgdf.dropna(axis=0,how='all',inplace=True)
     cnames = msgdf.columns.tolist()
-    cnames = [i for i in cnames if not ('unknown_' in i or
-                                        '_position' in i or
-                                        'phase' in i)]
+    cnames = [i for i in cnames if not ('unknown_' in i)]
+    #cnames = [i for i in cnames if not ('unknown_' in i or
+    #                                    '_position' in i or
+    #                                    'phase' in i)]
     msgdf = msgdf[cnames]
 
     msgdf = msgdf.where((pandas.notnull(msgdf)), None)

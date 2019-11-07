@@ -1,12 +1,12 @@
 Package: fitparseR
 Type: Package
 Title: Read Garmin FIT Files
-Version: 0.1.0
-Date: 2019-01-02
+Version: 0.2.0
+Date: 2019-11-06
 Author: Craig Mohn
+Maintainer: Craig Mohn <craig.mohn.projects@gmail.com>
 Depends: R (>= 3.3)
 Imports: reticulate, jsonlite
-Maintainer: Craig Mohn <craig.mohn.projects@gmail.com>
 Description: R function which runs the python package fitparse to
     read a Garmin .fit file and return the results as 3 dataframes
     containing the session summary data, the data records from the
