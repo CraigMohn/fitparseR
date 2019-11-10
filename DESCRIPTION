@@ -1,8 +1,8 @@
 Package: fitparseR
 Type: Package
 Title: Read Garmin FIT Files
-Version: 0.2.0
-Date: 2019-11-06
+Version: 0.2.5
+Date: 2019-11-09
 Author: Craig Mohn
 Maintainer: Craig Mohn <craig.mohn.projects@gmail.com>
 Depends: R (>= 3.3)

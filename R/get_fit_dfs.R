@@ -29,17 +29,23 @@ get_fit_dfs <- function(fitfilename,checkconda=TRUE,
 
   tfile <- tempfile()
 
-  message_df(fitfile, outfile = tfile, msgtype = "session",
-             appendunits = FALSE, fromR = TRUE)
-  session <- listofcols_to_df(jsonlite::fromJSON(tfile))
-
   message_df(fitfile, outfile = tfile, fromR = TRUE, dropmissing=FALSE)
   records <- listofcols_to_df(jsonlite::fromJSON(tfile))
   if (!missing(requiredVars)) records <- addVars(records,requiredVars)
 
+  message_df(fitfile, outfile = tfile, msgtype = "session",
+             appendunits = FALSE, fromR = TRUE, dropmissing=FALSE)
+  session <- listofcols_to_df(jsonlite::fromJSON(tfile))
+
   message_df(fitfile, outfile = tfile, msgtype = "event",
              appendunits = FALSE, fromR = TRUE)
   events <- listofcols_to_df(jsonlite::fromJSON(tfile))
+
+  #session <<- session
+  #records <<- records
+  #events <<- events
+
+  if (nrow(session) != 1) stop(paste0("session dataframe error, nrows=",nrow(session)))
 
   return(list(session = session, records = records, events = events))
 }
@@ -47,11 +53,28 @@ get_fit_dfs <- function(fitfilename,checkconda=TRUE,
 listofcols_to_df <- function(listofcolumns)  {
   cnames <- names(listofcolumns)
   vvv <- list()
-  for (vlist in listofcolumns) {
-    vlist[lengths(vlist) == 0] <- NA
-    vvv[[length(vvv) + 1]] <- unlist(vlist)
+  onames <- numeric(0)
+  for (i in seq_along(listofcolumns)) {
+    vlist <- listofcolumns[[i]]
+    nsubvars <- max(c(lengths(vlist),1))
+
+    vlist[lengths(vlist) == 0] <- list(rep(NA,nsubvars))
+    if (min(lengths(vlist)) != max(lengths(vlist)))
+       stop("bad length of multivalued variable ",cnames[i],".  min, max = ",
+            min(lengths(vlist)),"  ",max(lengths(vlist)))
+
+    if (nsubvars == 1) {
+      vvv[[length(vvv) + 1]] <- unlist(vlist)
+      onames <- c(onames,cnames[[i]])
+    } else {
+      vvec <- unlist(vlist)
+      for (j in 1:nsubvars) {
+        vvv[[length(vvv) + 1]] <- vvec[j + (seq(1,length(lengths(vlist)))-1)*nsubvars]
+        onames <- c(onames,paste0(cnames[i],"_",j))
+      }
+    }
   }
-  names(vvv) <- cnames
+  names(vvv) <- onames
   dfret <- as.data.frame(vvv, stringsAsFactors = FALSE)
   #  the key timestamp variable should be POSIXct
   if ("timestamp" %in% cnames) {
