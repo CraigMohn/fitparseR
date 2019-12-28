@@ -58,13 +58,13 @@ def message_df(fitfile=None,msgtype='record',
 
 def readff(ffname=None) :
     if ffname is None:
-        print ("No fit file name given")
+        print("No fit file name given")
         sys.exit(1)
     try:
         fitfile = FitFile(ffname)
         fitfile.parse()
     except FitParseError as e:
-        print ("Error while parsing .FIT file: %s" % e)
+        print("Error while parsing .FIT file: %s" % e)
         sys.exit(1)
 
     return fitfile

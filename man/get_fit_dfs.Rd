@@ -19,6 +19,6 @@ a list of three dataframes:  \eqn{session},
     \eqn{records}and \eqn{events}
 }
 \description{
-\code{get_fit_dfs} reads a gps .fit files using python
+\code{get_fit_dfs} reads a gps .fit files using call to python fitparse
  and put into session, data record, and event dataframes
 }

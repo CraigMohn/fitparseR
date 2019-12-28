@@ -6,7 +6,8 @@
 \description{
 The fitparseR package uses reticulate and jsonlite to wrap
   the python fitparse package, which seems to be kept more
-  current than the native R solutions.
+  current than the native R solutions for processing .fit
+  files
 }
 \section{read .fit file}{
 

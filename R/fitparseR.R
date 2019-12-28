@@ -8,7 +8,7 @@
 #' @section read .fit file:
 #'   \link{get_fit_dfs}
 #'
-#' @import reticulate jsonlite
+#' @import reticulate
 #'
 #' @name fitparseR
 NULL

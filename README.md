@@ -5,7 +5,7 @@ The python package fitparse seems to be the best-maintained and reasonably
 current tool for reading the .fit files produced by Garmin devices.  Many 
 thanks to the developers/maintainers of that package. 
 
-This package was developed to read .fit files from the Edge 820 that replaces 
+This package was developed to read .fit files from the Edge 820 that replaced 
 my old Edge 800 unit. Several alternative R packages were incapable of dealing
 with the new format, and quick attempts at patching them were fruitless. 
 In the end it was easiest to spend a couple of evenings learning enough Python 
@@ -21,13 +21,13 @@ and that throws an error, the code is in readfitffile.py, and you don't need
 to know much Python to figure out how to make it suit your needs.
 
 You have to have a conda (either anaconda or miniconda) setup that R can find.
-There are lots of resources to help you do that.  Use your search engine.  In
-theory it should require python 2.X, but I had no problems with python 3.X.  
+There are lots of resources to help you do that.  Use your search engine.  This
+package requires python 2.X.  The environment needs a suitable version on pandas  
+and numpy.  Python 2.7.15, pandas 0.24.1 and numpy 1.15.4 are known to work.  
+Support for python 2.X ends with reticulate 1.14, so this package may become
+a hassle to use in the future.
+
 The first call to read a fit file triggers a time-consuming check that the
 conda environment has the required packages installed, unless a flag to skip it
 is TRUE.
-
-This package is not fast.  It's not terribly elegant.  But it is more likely to
-stay current than other options, since python fitparse updates should be
-seamlessly incorporated.
 
