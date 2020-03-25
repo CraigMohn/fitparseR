@@ -46,8 +46,6 @@ get_fit_dfs <- function(fitfilename,checkconda=TRUE,
                  appendunits = FALSE, fromR = TRUE))
   if (!missing(requiredVars)) records <- addVars(records,requiredVars)
 
-
-
 session <<- session
 records <<- records
 events <<- events
