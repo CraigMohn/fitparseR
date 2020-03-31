@@ -46,10 +46,6 @@ get_fit_dfs <- function(fitfilename,checkconda=TRUE,
                  appendunits = FALSE, fromR = TRUE))
   if (!missing(requiredVars)) records <- addVars(records,requiredVars)
 
-session <<- session
-records <<- records
-events <<- events
-
   if (nrow(session) != 1) stop(paste0("session dataframe error, nrows=",nrow(session)))
 
   return(list(session = session, records = records, events = events))
